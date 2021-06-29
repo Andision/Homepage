@@ -40,22 +40,7 @@
       <el-main class="main" style="padding: 0;"><router-view /></el-main>
       <el-footer class="footer" style="padding: 0;">
         <div class="footer-div">
-          <!-- <el-row>
-            <el-col :span="6"><div>LOGO</div></el-col>
-            <el-col :span="6" style="text-align: left;">
-              <div>联系我们</div>
-              <div>123@tsinghua.edu.cn</div>
-            </el-col>
-            <el-col :span="12">
-              <div>
-                <el-row>
-                  <el-col :span="5" :offset="9"><div>链接</div></el-col>
-                  <el-col :span="5"><div>反馈</div></el-col>
-                  <el-col :span="5"><div>帮助</div></el-col>
-                </el-row>
-              </div>
-            </el-col>
-          </el-row> -->
+          © 2020 Andision Zhang. All Rights Reserved | <a href="http://beian.miit.gov.cn/" style="color:white;">京ICP备20029294号</a> | Design by Andision with ❤
         </div>
       </el-footer>
     </el-container>
