@@ -4,7 +4,7 @@
   "description": "Homepage of Andision",
   "author": "andision629@qq.com",
   "private": true,
-  "homepage":"https://andision.github.io/Homepage/"
+  "homepage":"https://andision.github.io/Homepage/",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
