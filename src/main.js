@@ -9,6 +9,12 @@ import ElementUI from 'element-ui'
 // import locale from 'element-ui/lib/locale/lang/en'
 import axios from 'axios'
 
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
+Vue.config.productionTip = false
+
+Vue.use(Antd)
+
 Vue.prototype.$axios = axios
 
 Vue.use(ElementUI)

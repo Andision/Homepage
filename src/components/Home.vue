@@ -13,13 +13,13 @@
       <div class="section-title">关于我</div>
       <div class="section-content">
         <el-row :gutter="50">
-          <el-col :span="12">
+          <el-col :span="16">
             <el-image
               src="https://s1.ax1x.com/2020/07/29/aVDS3j.jpg"
               style="height: 410px"
             ></el-image>
           </el-col>
-          <el-col :span="12" style="text-align: left">
+          <el-col :span="8" style="text-align: left">
             <br />
             <br />
             <p>THU CST本科在读</p>
@@ -101,19 +101,117 @@
         </el-row>
       </div>
     </div>
+
+    <div class="section">
+      <div class="section-title">联络方式</div>
+      <div class="section-content">
+        <el-row gutter="0">
+          <el-col :span="12">
+            <div>
+              <el-form ref="form" :model="form" label-width="80px" label-position="top">
+                <el-form-item label="您的名称">
+                  <el-input
+                    v-model="msg.name"
+                    placeholder="如何称呼您？"
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="联系方式">
+                  <el-input v-model="msg.mail" placeholder="如何联系您？"></el-input>
+                </el-form-item>
+                <el-form-item label="您的留言">
+                  <el-input
+                    type="textarea"
+                    :rows="4"
+                    placeholder="您想说的话"
+                    v-model="msg.msg"
+                  >
+                  </el-input>
+                </el-form-item>
+                <el-form-item style="text-align:right;">
+                  <el-button type="primary" @click="onSubmit">发送</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div style="margin-top: 40px; margin-left:80px;">
+              <el-row>
+              <a href="mailto:andision.zhang@qq.com">
+                <a-button type="dashed" size="large" class="contract">
+                  <a-icon type="mail" theme="filled" />
+                  andision.zhang@qq.com
+                </a-button>
+              </a>
+              </el-row>
+              <el-row>
+              <a href="https://github.com/Andision">
+                <a-button type="dashed" size="large" class="contract">
+                  <a-icon type="github" theme="filled" />
+                  github.com/Andision
+                </a-button>
+              </a>
+              </el-row>
+              <el-row>
+              <a href="https://s1.ax1x.com/2020/07/29/aVDIaT.jpg">
+                <a-button type="dashed" size="large" class="contract">
+                  <a-icon type="wechat" theme="filled" />
+                  AndisionZhang
+                </a-button>
+              </a>
+              </el-row>
+              <el-row>
+              <a href="https://www.zhihu.com/people/andision">
+                <a-button type="dashed" size="large" class="contract">
+                  <a-icon type="zhihu" />
+                  Andision
+                </a-button>
+              </a>
+              </el-row>
+              <el-row>
+              <a href="https://music.163.com/#/user/home?id=356838641">
+                <a-button type="dashed" size="large" class="contract">
+                  <IconFont type="icon-netease" />
+                  Andision
+                </a-button>
+              </a>
+              </el-row>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { Icon } from 'ant-design-vue'
+
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_2680142_f0t0dcbuyyv.js'
+})
 export default {
-  name: 'HelloWorld',
+  components: {
+    IconFont
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: {
+        name: '',
+        mail: '',
+        msg: ''
+      }
     }
   }
 }
 </script>
+
+<style>
+.el-form-item__label{
+  font-size: medium;
+  color: black;
+  font-weight: bold;
+}
+</style>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -144,6 +242,9 @@ export default {
 
 .section-content {
   margin-top: 50px;
+}
+.contract{
+  margin: 10px;
 }
 </style>
 
