@@ -12,12 +12,12 @@
     <div class="section">
       <div class="section-title">关于我</div>
       <div class="section-content">
-        <el-row :gutter="20">
+        <el-row :gutter="50">
           <el-col :span="12">
-            <img
+            <el-image
               src="https://s1.ax1x.com/2020/07/29/aVDS3j.jpg"
               style="height: 410px"
-            />
+            ></el-image>
           </el-col>
           <el-col :span="12" style="text-align: left">
             <br />
