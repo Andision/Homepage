@@ -47,7 +47,8 @@ export default {
 
 <style scoped>
 .all{
-  margin: 100px;
+  padding: 100px;
+  background-color: black;
 }
 .row{
   margin-top: 20px;
