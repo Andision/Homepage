@@ -37,22 +37,22 @@
     <div class="section">
       <div class="section-title">近期工作</div>
       <div class="section-content">
-        <el-row :gutter="100">
+        <el-row :gutter="50">
           <el-col :span="8">
             <div class="post-format-content">
               <div class="post-thumbnail">
                 <img
-                  src="https://s1.ax1x.com/2020/07/29/aVDQDx.png"
+                  src="https://s1.ax1x.com/2020/07/29/aVDlb6.png"
                   class="attachment-thumbnail wp-post-image"
                 />
               </div>
               <div class="content-wrap">
                 <h1 class="entry-title">
                   <a
-                    href="http://baidu.com"
+                    href="/#/gallery"
                     class="featured-image"
                     rel="bookmark"
-                    >Music</a
+                    ><div class="hover-word">时光相册</div></a
                   >
                 </h1>
               </div>
@@ -72,7 +72,7 @@
                     href="http://baidu.com"
                     class="featured-image"
                     rel="bookmark"
-                    >{{ Music & Fashion }}</a
+                    ><div class="hover-word">敬请期待</div></a
                   >
                 </h1>
               </div>
@@ -92,7 +92,7 @@
                     href="http://baidu.com"
                     class="featured-image"
                     rel="bookmark"
-                    >{{ Music & Fashion }}</a
+                    ><div class="hover-word">敬请期待</div></a
                   >
                 </h1>
               </div>
@@ -122,7 +122,7 @@
                   <el-input
                     type="textarea"
                     :rows="4"
-                    placeholder="您想说的话"
+                    placeholder="您想说的话~"
                     v-model="msg.msg"
                   >
                   </el-input>
@@ -211,6 +211,9 @@ export default {
   color: black;
   font-weight: bold;
 }
+.main{
+  background-color: white;
+}
 </style>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -245,6 +248,10 @@ export default {
 }
 .contract{
   margin: 10px;
+}
+
+.hover-word{
+  font-size: xx-large;
 }
 </style>
 

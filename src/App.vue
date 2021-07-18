@@ -7,12 +7,14 @@
           mode="horizontal"
           @select="handleMenuSelect"
         >
-          <div
-            style="float: left; margin-top:10px; margin-left: 50px; padding: 5px; font-size: x-large; cursor: pointer;"
-            @click="handleGoHomePage"
-          >
-            AndisionZhang
-          </div>
+          <a href="/" style="color:black;">
+            <div
+              style="float: left; margin-top:10px; margin-left: 50px; padding: 5px; font-size: x-large; cursor: pointer;"
+              @click="handleGoHomePage"
+            >
+              AndisionZhang
+            </div>
+          </a>
 
           <!-- <el-menu-item class="menu-item" index="7" style="float: right;">{{
             language.app_User
@@ -61,14 +63,15 @@ export default {
     }
   },
   mounted: function () {
-    this.checkLogin()
+    // this.checkLogin()
   },
   methods: {
     handleMenuSelect (key, keyPath) {
       console.log(key, keyPath)
       switch (key) {
         case '1':
-          this.$router.push({path: '/'})
+          // this.$router.push({path: '/'})
+          window.location.href = '/'
           break
         case '2':
           this.$router.push({path: '/leaderboard'})
