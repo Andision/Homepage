@@ -52,7 +52,7 @@
           <el-upload
             class="upload-demo"
             ref="upload"
-            action="http://api.andisionzhang.com/codepic"
+            action="http://api.andisionzhang.com:45000/codepic"
             accept="image/png, image/jpeg"
             :data="ruleForm"
             :limit="1"
