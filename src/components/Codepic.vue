@@ -11,7 +11,7 @@
           <h1>帮您将图片转换为字符</h1>
         </div>
 
-        <div class="section" style="width: 20%">
+        <div class="section" style="width: 30%">
           <!-- <el-upload
             class="upload-demo"
             action="http://127.0.0.1:5000/codepic"
