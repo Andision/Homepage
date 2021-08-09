@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Test from '@/components/Test'
 import Gallery from '@/components/Gallery'
+import Codepic from '@/components/Codepic'
 
 Vue.use(Router)
 
@@ -31,6 +32,14 @@ export default new Router({
         title: 'Gallery | AndisionZhang'
       },
       component: Gallery
+    },
+    {
+      path: '/codepic',
+      name: 'Codepic',
+      meta: {
+        title: 'Codepic | AndisionZhang'
+      },
+      component: Codepic
     }
   ]
 })

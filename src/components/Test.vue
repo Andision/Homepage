@@ -1,55 +1,80 @@
-
 <template>
-  <div class="all">
-    <el-row :gutter="20">
-      <el-col :span="24/stride" v-for="(col,index1) in colnum" :key="index1">
-        <el-row v-for="(row,index2) in rownum" :key="index2" class="row">
-          <el-image
-            style="width: 100%;"
-            :src="srcList[row*stride+col]"
-            :preview-src-list="srcList"
-            lazy
-          >
-            <div slot="error" class="image-slot">
-              <!-- <i class="el-icon-picture-outline"></i> -->
-            </div>
-          </el-image>
-        </el-row>
-      </el-col>
-    </el-row>
-  </div>
+  <el-form
+    :model="ruleForm"
+    status-icon
+    :rules="rules"
+    ref="ruleForm"
+    label-width="100px"
+    class="demo-ruleForm"
+  >
+    <el-form-item label="密码" prop="pass">
+      <el-input
+        type="password"
+        v-model="ruleForm.pass"
+        autocomplete="off"
+      ></el-input>
+    </el-form-item>
+    <el-form-item label="确认密码" prop="checkPass">
+      <el-input
+        type="password"
+        v-model="ruleForm.checkPass"
+        autocomplete="off"
+      ></el-input>
+    </el-form-item>
+    <el-form-item label="年龄" prop="age">
+      <el-input v-model.number="ruleForm.age"></el-input>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+      <el-button @click="resetForm('ruleForm')">重置</el-button>
+    </el-form-item>
+  </el-form>
 </template>
-
 <script>
-import pics from '@/components/gallery.json'
 export default {
   data () {
+    var checkAge = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('年龄不能为空'))
+      }
+      setTimeout(() => {
+        if (!Number.isInteger(value)) {
+          callback(new Error('请输入数字值'))
+        } else {
+          if (value < 18) {
+            callback(new Error('必须年满18岁'))
+          } else {
+            callback()
+          }
+        }
+      }, 1000)
+    }
     return {
-      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-      srcList: pics.pics,
-      rownum: [],
-      colnum: [],
-      stride: pics.stride
+      ruleForm: {
+        pass: '',
+        checkPass: '',
+        age: ''
+      },
+      rules: {
+
+        age: [{ validator: checkAge, trigger: 'blur' }]
+      }
     }
   },
-  mounted: function () {
-    var l = this.srcList.length
-    var s = Math.ceil(l / this.stride)
-    for (var i = 0; i < s; i++) {
-      this.rownum.push(i)
-    }
-    for (var j = 0; j < this.stride; j++) {
-      this.colnum.push(j)
+  methods: {
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!')
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }
 </script>
-
-<style scoped>
-.all{
-  margin: 100px;
-}
-.row{
-  margin-top: 20px;
-}
-</style>

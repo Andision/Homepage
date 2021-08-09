@@ -42,7 +42,7 @@
             <div class="post-format-content">
               <div class="post-thumbnail">
                 <img
-                  src="https://s1.ax1x.com/2020/07/29/aVDlb6.png"
+                  src="https://z3.ax1x.com/2021/07/20/WNlA7F.png"
                   class="attachment-thumbnail wp-post-image"
                 />
               </div>
@@ -52,7 +52,10 @@
                     href="/#/gallery"
                     class="featured-image"
                     rel="bookmark"
-                    ><div class="hover-word">时光相册</div></a
+                    >
+                    <div class="hover-word-title">时光相册</div>
+                    <div class="hover-word-content">记录生活中的点滴美好</div>
+                    </a
                   >
                 </h1>
               </div>
@@ -62,17 +65,18 @@
             <div class="post-format-content">
               <div class="post-thumbnail">
                 <img
-                  src="https://s1.ax1x.com/2020/07/29/aVDQDx.png"
+                  src="https://z3.ax1x.com/2021/07/20/WNKJts.png"
                   class="attachment-thumbnail wp-post-image"
                 />
               </div>
               <div class="content-wrap">
                 <h1 class="entry-title">
                   <a
-                    href="http://baidu.com"
+                    href="/#/codepic"
                     class="featured-image"
                     rel="bookmark"
-                    ><div class="hover-word">敬请期待</div></a
+                    ><div class="hover-word-title">字符画</div>
+                    <div class="hover-word-content">将图片转换为字符</div></a
                   >
                 </h1>
               </div>
@@ -82,7 +86,7 @@
             <div class="post-format-content">
               <div class="post-thumbnail">
                 <img
-                  src="https://s1.ax1x.com/2020/07/29/aVDQDx.png"
+                  src="https://z3.ax1x.com/2021/07/20/WNlPXV.png"
                   class="attachment-thumbnail wp-post-image"
                 />
               </div>
@@ -92,7 +96,8 @@
                     href="http://baidu.com"
                     class="featured-image"
                     rel="bookmark"
-                    ><div class="hover-word">敬请期待</div></a
+                    ><div class="hover-word-title">敬请期待</div>
+                    <div class="hover-word-content"> </div></a
                   >
                 </h1>
               </div>
@@ -206,13 +211,13 @@ export default {
 </script>
 
 <style>
+.main{
+  background-color: white;
+}
 .el-form-item__label{
   font-size: medium;
   color: black;
   font-weight: bold;
-}
-.main{
-  background-color: white;
 }
 </style>
 
@@ -250,8 +255,11 @@ export default {
   margin: 10px;
 }
 
-.hover-word{
+.hover-word-title{
   font-size: xx-large;
+}
+.hover-word-content{
+  font-size: x-large;
 }
 </style>
 
