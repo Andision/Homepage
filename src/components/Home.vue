@@ -214,7 +214,7 @@ export default {
       formData.append('name', this.msg.name)
       formData.append('mail', this.msg.mail)
       formData.append('msg', this.msg.msg)
-      this.$axios.get('/api/msg', formData).then(res => {
+      this.$axios.post('/api/msg', formData).then(res => {
         console.log('send', res)
         if (res.status === 200) {
           this.$message({
