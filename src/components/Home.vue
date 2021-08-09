@@ -110,10 +110,10 @@
     <div class="section">
       <div class="section-title">联络方式</div>
       <div class="section-content">
-        <el-row gutter="0">
+        <el-row :gutter="0">
           <el-col :span="12">
             <div>
-              <el-form ref="form" :model="form" label-width="80px" label-position="top">
+              <el-form ref="form" :model="msg" label-width="80px" label-position="top">
                 <el-form-item label="您的名称">
                   <el-input
                     v-model="msg.name"
@@ -205,6 +205,24 @@ export default {
         mail: '',
         msg: ''
       }
+    }
+  },
+  methods: {
+    onSubmit () {
+      console.log(this.msg)
+      let formData = new FormData()
+      formData.append('name', this.msg.name)
+      formData.append('mail', this.msg.mail)
+      formData.append('msg', this.msg.msg)
+      this.$axios.get('/api/msg', formData).then(res => {
+        console.log('send', res)
+        if (res.status === 200) {
+          this.$message({
+            message: '发送成功',
+            type: 'success'
+          })
+        }
+      })
     }
   }
 }
