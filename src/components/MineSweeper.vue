@@ -364,7 +364,7 @@ export default {
             }
           }
         }
-        // console.log(markMine, markMine === this.neighbourMineCount[index])
+        console.log(markMine, markMine === this.neighbourMineCount[index])
         if (markMine === this.neighbourMineCount[index]) {
           for (i in dx) {
             for (j in dx) {
@@ -386,6 +386,7 @@ export default {
                   this.openStatus[dindex] = 1
                   this.floodfill(x + dx[i], y + dx[j], true)
                 }
+                this.openStatus[dindex] = 1
               }
             }
           }
