@@ -378,11 +378,12 @@ export default {
               }
               const dindex = (x + dx[i]) * this.width + (y + dx[j])
               if (this.markStatus[dindex] !== 1) {
-                this.openStatus[dindex] = 1
                 if (this.mines[dindex]) {
+                  this.openStatus[dindex] = 1
                   return true
                 }
-                if (!(this.neighbourMineCount[dindex] > 0)) {
+                if (!(this.neighbourMineCount[dindex] > 0) && this.openStatus[dindex] === 0) {
+                  this.openStatus[dindex] = 1
                   this.floodfill(x + dx[i], y + dx[j], true)
                 }
               }
