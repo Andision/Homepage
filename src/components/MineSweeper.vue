@@ -95,6 +95,7 @@ export default {
         c: 0,
         stamp: 0
       },
+      isFirst: true,
       mines: [],
       openStatus: [],
       markStatus: [],
@@ -206,6 +207,7 @@ export default {
     },
     init (width, height, mineCount) {
       console.log('INIT', width, height, mineCount)
+      this.isFirst = true
       this.isEnd = false
       const total = width * height
       const mines = new Array(total).fill(0)
@@ -235,7 +237,7 @@ export default {
       //   this.time.m = this.time.m + 1
       // }
       var t = parseInt(Date.parse(new Date())) / 1000
-      console.log(t)
+      // console.log(t)
       this.time.s = (t - this.time.stamp) % 60
       this.time.m = parseInt((t - this.time.stamp) / 60)
     },
@@ -246,10 +248,98 @@ export default {
         return
       }
       const index = x * this.width + y
+
+      if (this.isFirst) {
+        if (this.mines[index]) {
+          var t = 0
+          while (!this.mines[t]) {
+            this.mines[t] = 1
+            this.mines[index] = 0
+            this.handleLeftClick(x, y)
+          }
+        }
+      }
+
       if (this.markStatus[index] === 1 || this.markStatus[index] === 2) {
         return
       }
 
+      if (this.openStatus[index] === 1) {
+        console.log('autoopen')
+        isOver = this.autoOpen(x, y)
+        console.log('autoopen', isOver)
+        // var dx = [0, 1, -1]
+        // var markMine = 0
+        // for (var i in dx) {
+        //   for (var j in dx) {
+        //     if (dx[i] === 0 && dx[j] === 0) {
+        //       continue
+        //     } else {
+        //       if (
+        //         x + dx[i] < 0 ||
+        //         y + dx[j] < 0 ||
+        //         x + dx[i] === this.height ||
+        //         y + dx[j] === this.width
+        //       ) {
+        //         continue
+        //       }
+        //       const dindex = (x + dx[i]) * this.width + (y + dx[j])
+        //       console.log(dx[i], dx[j], dindex)
+        //       if (this.markStatus[dindex] === 1) {
+        //         markMine = markMine + 1
+        //       }
+        //     }
+        //   }
+        // }
+        // // console.log(markMine, markMine === this.neighbourMineCount[index])
+        // if (markMine === this.neighbourMineCount[index]) {
+        //   for (i in dx) {
+        //     for (j in dx) {
+        //       if (
+        //         x + dx[i] < 0 ||
+        //         y + dx[j] < 0 ||
+        //         x + dx[i] === this.height ||
+        //         y + dx[j] === this.width
+        //       ) {
+        //         continue
+        //       }
+        //       const dindex = (x + dx[i]) * this.width + (y + dx[j])
+        //       if (this.markStatus[dindex] !== 1) {
+        //         this.openStatus[dindex] = 1
+        //         if (this.mines[dindex]) {
+        //           isOver = true
+        //           break
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+      }
+
+      if (this.mines[index] || isOver) {
+        this.openStatus.splice(index, 1, 1)
+        this.isEnd = true
+        this.$nextTick(() => {
+          this.$alert('Oops! You dead......')
+        })
+
+        return
+      }
+
+      if (this.neighbourMineCount[index] > 0) {
+        this.openStatus.splice(index, 1, 1)
+        if (!this.isFirst) {
+          return
+        }
+      }
+      this.floodfill(x, y, true)
+      this.isFirst = false
+    },
+    autoOpen (x, y) {
+      const index = x * this.width + y
+      if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
+        return false
+      }
       if (this.openStatus[index] === 1) {
         var dx = [0, 1, -1]
         var markMine = 0
@@ -290,45 +380,46 @@ export default {
               if (this.markStatus[dindex] !== 1) {
                 this.openStatus[dindex] = 1
                 if (this.mines[dindex]) {
-                  isOver = true
-                  break
+                  return true
                 }
               }
             }
           }
         }
       }
-
-      if (this.mines[index] || isOver) {
-        this.openStatus.splice(index, 1, 1)
-        this.isEnd = true
-        this.$nextTick(() => {
-          alert('mine')
-        })
-
-        return
+      for (i in dx) {
+        for (j in dx) {
+          this.autoOpen(x + dx[i], y + dx[y])
+        }
       }
-      if (this.neighbourMineCount[index] > 0) {
-        this.openStatus.splice(index, 1, 1)
-        return
-      }
-      this.floodfill(x, y)
+      return false
     },
-    floodfill (x, y) {
+    floodfill (x, y, t) {
+      console.log('ff', x, y, t)
       if (x < 0 || y < 0 || x === this.height || y === this.width) {
+        console.log('ff1')
         return
       }
       const index = x * this.width + y
-      if (this.openStatus[index] === 1) {
+      if (this.mines[index]) {
         return
+      }
+      if (this.openStatus[index] === 1) {
+        if (!t) {
+          console.log('ff2')
+          return
+        }
       }
       this.openStatus.splice(index, 1, 1)
       if (this.neighbourMineCount[index] > 0) {
-        return
+        console.log('ff3')
+        if (!t) {
+          return
+        }
       }
       for (let i = -1; i < 2; i++) {
         for (let j = -1; j < 2; j++) {
-          this.floodfill(x + i, y + j)
+          this.floodfill(x + i, y + j, false)
         }
       }
     },
