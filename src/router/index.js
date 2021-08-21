@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Test from '@/components/Test'
 import Gallery from '@/components/Gallery'
 import Codepic from '@/components/Codepic'
+import Game from '@/components/Game'
 
 Vue.use(Router)
 
@@ -40,6 +41,14 @@ export default new Router({
         title: 'Codepic | AndisionZhang'
       },
       component: Codepic
+    },
+    {
+      path: '/game',
+      name: 'Game',
+      meta: {
+        title: 'Game | AndisionZhang'
+      },
+      component: Game
     }
   ]
 })
