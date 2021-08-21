@@ -47,7 +47,7 @@
           <el-button
             type="danger"
             style="width: 100px"
-            @click="handleSubmitScore"
+            @click="handleBack"
             >选择难度</el-button
           >
         </div>
@@ -148,6 +148,7 @@ export default {
         if (match) {
           this.$nextTick(() => {
             // alert('win')
+            this.handleSubmitScore()
           })
           this.isEnd = true
         }
@@ -196,6 +197,9 @@ export default {
           //   message: '取消输入'
           // })
         })
+    },
+    handleBack () {
+      this.$emit('close', '')
     },
     reStart () {
       this.init(this.width, this.height, this.mineCount)

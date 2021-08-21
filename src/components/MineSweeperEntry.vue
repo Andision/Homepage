@@ -51,6 +51,7 @@
           :height="height"
           :mine-count="mineCount"
           class="app-section"
+          v-on:close="handleReset"
         />
       </div>
   </div>
@@ -63,6 +64,9 @@ export default {
     MineSweeper
   },
   methods: {
+    handleReset () {
+      this.isShowGame = false
+    },
     showGame (width, height, mineCount) {
       this.width = width
       this.height = height
