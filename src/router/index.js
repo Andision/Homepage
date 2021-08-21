@@ -4,7 +4,7 @@ import Home from '@/components/Home'
 import Test from '@/components/Test'
 import Gallery from '@/components/Gallery'
 import Codepic from '@/components/Codepic'
-import Game from '@/components/Game'
+import MineSweeperEntry from '@/components/MineSweeperEntry'
 
 Vue.use(Router)
 
@@ -43,12 +43,12 @@ export default new Router({
       component: Codepic
     },
     {
-      path: '/game',
-      name: 'Game',
+      path: '/game/mine',
+      name: 'MineSweeperEntry',
       meta: {
-        title: 'Game | AndisionZhang'
+        title: 'MineSweeper | AndisionZhang'
       },
-      component: Game
+      component: MineSweeperEntry
     }
   ]
 })

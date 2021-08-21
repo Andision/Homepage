@@ -176,6 +176,9 @@ export default {
           let formData = new FormData()
           formData.append('m', that.time.m)
           formData.append('s', that.time.s)
+          formData.append('w', that.width)
+          formData.append('h', that.height)
+          formData.append('mine', that.mineCount)
           formData.append('name', value)
           this.$axios.post('/api/mine', formData).then((res) => {
             console.log('upload', res)
