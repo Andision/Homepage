@@ -320,7 +320,7 @@ export default {
         this.openStatus.splice(index, 1, 1)
         this.isEnd = true
         this.$nextTick(() => {
-          this.$alert('Oops! You dead......')
+          this.$alert('Oops! You dead...... Good luck next time🤪')
         })
 
         return
@@ -382,6 +382,9 @@ export default {
                 if (this.mines[dindex]) {
                   return true
                 }
+                if (!(this.neighbourMineCount[dindex] > 0)) {
+                  this.floodfill(x + dx[i], y + dx[j], true)
+                }
               }
             }
           }
@@ -413,7 +416,7 @@ export default {
       this.openStatus.splice(index, 1, 1)
       if (this.neighbourMineCount[index] > 0) {
         console.log('ff3')
-        if (!t) {
+        if (!t || !this.isFirst) {
           return
         }
       }
