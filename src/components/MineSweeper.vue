@@ -177,7 +177,7 @@ export default {
           formData.append('m', that.time.m)
           formData.append('s', that.time.s)
           formData.append('name', value)
-          this.$axios.post('/mine', formData).then((res) => {
+          this.$axios.post('/api/mine', formData).then((res) => {
             console.log('upload', res)
             if (res.status === 200) {
               that.$message({
