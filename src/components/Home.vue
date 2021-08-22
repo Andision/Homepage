@@ -86,6 +86,27 @@
             <div class="post-format-content">
               <div class="post-thumbnail">
                 <img
+                  src="https://z3.ax1x.com/2021/08/22/hSlsun.png"
+                  class="attachment-thumbnail wp-post-image"
+                />
+              </div>
+              <div class="content-wrap">
+                <h1 class="entry-title">
+                  <a
+                    href="/#/game/mine"
+                    class="featured-image"
+                    rel="bookmark"
+                    ><div class="hover-word-title">扫雷</div>
+                    <div class="hover-word-content">回顾经典游戏</div></a
+                  >
+                </h1>
+              </div>
+            </div>
+          </el-col>
+          <!-- <el-col :span="8">
+            <div class="post-format-content">
+              <div class="post-thumbnail">
+                <img
                   src="https://z3.ax1x.com/2021/07/20/WNlPXV.png"
                   class="attachment-thumbnail wp-post-image"
                 />
@@ -102,7 +123,7 @@
                 </h1>
               </div>
             </div>
-          </el-col>
+          </el-col> -->
         </el-row>
       </div>
     </div>
@@ -284,6 +305,8 @@ export default {
 <style scoped>
 .post-format-content {
   position: relative;
+  border:5px solid #ababab;
+  border-radius:25px;
 }
 
 .post-thumbnail {

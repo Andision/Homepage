@@ -5,6 +5,7 @@ import Test from '@/components/Test'
 import Gallery from '@/components/Gallery'
 import Codepic from '@/components/Codepic'
 import MineSweeperEntry from '@/components/MineSweeperEntry'
+import Gameboard from '@/components/Gameboard'
 
 Vue.use(Router)
 
@@ -49,6 +50,14 @@ export default new Router({
         title: 'MineSweeper | AndisionZhang'
       },
       component: MineSweeperEntry
+    },
+    {
+      path: '/game/leaderboard',
+      name: 'Gameboard',
+      meta: {
+        title: 'MineSweeper | AndisionZhang'
+      },
+      component: Gameboard
     }
   ]
 })
