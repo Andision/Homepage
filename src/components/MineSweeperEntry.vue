@@ -13,7 +13,7 @@
             ><el-button type="success" @click="showGame(20,16,99)"><div style="margin-bottom:10px;">大师</div><div>20×16 99💣</div></el-button></el-row
           >
           <el-row style="margin-bottom: 20px"
-            ><el-link type="primary" @click="this.$router.push({path: '/#/game/leaderboard'})">排行榜</el-link></el-row
+            ><el-link type="primary" href="/#/game/leaderboard">排行榜</el-link></el-row
           >
         </el-col>
         <el-col :span="12">
