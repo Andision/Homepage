@@ -250,14 +250,14 @@ export default {
       const index = x * this.width + y
 
       if (this.isFirst) {
-        if (this.mines[index]) {
-          var t = 0
-          while (!this.mines[t]) {
-            this.mines[t] = 1
-            this.mines[index] = 0
-            this.handleLeftClick(x, y)
-          }
-        }
+        // if (this.mines[index]) {
+        //   var t = 0
+        //   while (!this.mines[t]) {
+        //     this.mines[t] = 1
+        //     this.mines[index] = 0
+        //     this.handleLeftClick(x, y)
+        //   }
+        // }
       }
 
       if (this.markStatus[index] === 1 || this.markStatus[index] === 2) {
@@ -320,7 +320,11 @@ export default {
         this.openStatus.splice(index, 1, 1)
         this.isEnd = true
         this.$nextTick(() => {
-          this.$alert('Oops! You dead...... Good luck next time🤪')
+          if (this.isFirst) {
+            this.$alert('Sorry, this is a mine... To be honest, this is a bug🤪 I will fix it ASAP😵. Thank you for your patience.')
+          } else {
+            this.$alert('Oops! You dead...... Good luck next time🤪')
+          }
         })
 
         return

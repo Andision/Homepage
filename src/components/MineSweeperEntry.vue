@@ -128,8 +128,8 @@ export default {
         if (!Number.isInteger(value)) {
           callback(new Error('请输入数字值'))
         } else {
-          if (value < 1 || value > 20) {
-            callback(new Error('宽高需在0~20之间'))
+          if (value < 1 || value > 50) {
+            callback(new Error('宽高需在0~50之间'))
           } else {
             callback()
           }
