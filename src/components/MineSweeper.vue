@@ -1,57 +1,81 @@
 <template>
   <div class="game-container">
-    <div class="mine-sweeper-container" @contextmenu.prevent>
-      <div v-for="i in height" :key="i" class="mine-sweeper-row">
-        <div
-          v-for="j in width"
-          :key="j"
-          class="mine-sweeper-item"
-          :class="{ 'is-open': openStatus[(i - 1) * width + j - 1] }"
-          @click.left="handleLeftClick(i - 1, j - 1)"
-          @click.right="handleRightClick(i - 1, j - 1)"
-        >
-          <span
-            v-if="markStatus[(i - 1) * width + (j - 1)] === 1"
-            class="iconfont"
-            >🚩</span
-          >
-          <span
-            v-else-if="markStatus[(i - 1) * width + (j - 1)] === 2"
-            class="iconfont"
-            >❓</span
-          >
-          <template v-else-if="openStatus[(i - 1) * width + (j - 1)]">
-            <span v-if="mines[(i - 1) * width + (j - 1)]" class="iconfont"
-              >💣</span
+    <el-row style="margin-bottom: 50px;">
+        <el-col :span="8">
+          <span style="font-size: 60px">⌛</span>
+          <div style="font-size: 30px">{{ time.m }} : {{ time.s }}</div>
+        </el-col>
+        <el-col :span="8">
+          <span style="font-size: 60px">💣</span>
+          <div style="font-size: 30px">
+            {{ selectedMineCount }} / {{ mineCount }}
+          </div>
+        </el-col>
+        <el-col :span="8">
+          <div style="margin-top: 20px">
+            <el-button type="primary" style="width: 100px" @click="reStart"
+              >新游戏</el-button
             >
-            <span v-else-if="neighbourMineCount[(i - 1) * width + (j - 1)] > 0">
-              {{ neighbourMineCount[(i - 1) * width + (j - 1)] }}
-            </span>
-          </template>
-        </div>
-      </div>
-    </div>
-    <div class="panel-container">
-      <div class="panel-data-container">
-        <div style="font-size: 30px">{{ time.m }} : {{ time.s }}</div>
-        <span class="iconfont" style="font-size: 60px">💣</span>
-        <div style="font-size: 30px">
-          {{ selectedMineCount }} / {{ mineCount }}
-        </div>
-        <div style="margin-top: 20px">
-          <el-button type="primary" style="width: 100px" @click="reStart"
-            >新游戏</el-button
+          </div>
+          <div style="margin-top: 20px">
+            <el-button
+              type="danger"
+              style="width: 100px"
+              @click="handleBack"
+              >选择难度</el-button
+            >
+          </div>
+        </el-col>
+    </el-row>
+    <div class="mine-sweeper-container" @contextmenu.prevent>
+      <el-row>
+        <div v-for="i in height" :key="i" class="mine-sweeper-row">
+          <div
+            v-for="j in width"
+            :key="j"
+            class="mine-sweeper-item"
+            :class="{ 'is-open': openStatus[(i - 1) * width + j - 1] || isEnd }"
+            @click.left="handleLeftClick(i - 1, j - 1)"
+            @click.right="handleRightClick(i - 1, j - 1)"
           >
+            <template v-if="isEnd">
+              <div v-if="mines[(i - 1) * width + (j - 1)] && i - 1 == last.x && j - 1 == last.y" class="icon" style="background-color: red;"
+                >💀</div
+              >
+              <div v-if="mines[(i - 1) * width + (j - 1)] && markStatus[(i - 1) * width + (j - 1)] === 1" class="icon" style="background-color: green;"
+                >💥</div
+              >
+              <div v-if="!mines[(i - 1) * width + (j - 1)] && markStatus[(i - 1) * width + (j - 1)] === 1" class="icon" style="background-color: red;"
+                >{{ neighbourMineCount[(i - 1) * width + (j - 1)] }}</div
+              >
+              <div v-else-if="mines[(i - 1) * width + (j - 1)]" class="icon"
+                >💥</div
+              >
+              <div v-else-if="neighbourMineCount[(i - 1) * width + (j - 1)] > 0">
+                {{ neighbourMineCount[(i - 1) * width + (j - 1)] }}
+              </div>
+            </template>
+            <div
+              v-else-if="markStatus[(i - 1) * width + (j - 1)] === 1"
+              class="icon"
+              >🚩
+            </div>
+            <div
+              v-else-if="markStatus[(i - 1) * width + (j - 1)] === 2"
+              class="icon"
+              >❓
+            </div>
+            <template v-else-if="openStatus[(i - 1) * width + (j - 1)]">
+              <div v-if="mines[(i - 1) * width + (j - 1)]" class="icon"
+                >💥</div
+              >
+              <div v-else-if="neighbourMineCount[(i - 1) * width + (j - 1)] > 0">
+                {{ neighbourMineCount[(i - 1) * width + (j - 1)] }}
+              </div>
+            </template>
+          </div>
         </div>
-        <div style="margin-top: 20px">
-          <el-button
-            type="danger"
-            style="width: 100px"
-            @click="handleBack"
-            >选择难度</el-button
-          >
-        </div>
-      </div>
+      </el-row>
     </div>
   </div>
 </template>
@@ -99,8 +123,16 @@ export default {
       mines: [],
       openStatus: [],
       markStatus: [],
-      selectedMineCount: 0
+      selectedMineCount: 0,
+      last: {
+        x: -1,
+        y: -1
+      }
     }
+  },
+  mounted: function () {
+    var user = document.getElementById('user')
+    user.oncontextmenu = (e) => { return false }
   },
   computed: {
     neighbourMineCount () {
@@ -227,6 +259,9 @@ export default {
       this.time.t = setInterval(this.timer, 100)
     },
     timer () {
+      if (this.isEnd) {
+        return
+      }
       this.time.c = this.time.c + 100
       // if (this.time.c >= 1000) {
       //   this.time.c = 0
@@ -243,6 +278,8 @@ export default {
     },
     handleLeftClick (x, y) {
       console.log('L', x, y)
+      this.last.x = x
+      this.last.y = y
       var isOver = false
       if (this.isEnd) {
         return
@@ -265,7 +302,7 @@ export default {
       }
 
       if (this.openStatus[index] === 1) {
-        console.log('autoopen')
+        // console.log('autoopen')
         isOver = this.autoOpen(x, y)
         console.log('autoopen', isOver)
         // var dx = [0, 1, -1]
@@ -361,14 +398,14 @@ export default {
                 continue
               }
               const dindex = (x + dx[i]) * this.width + (y + dx[j])
-              console.log(dx[i], dx[j], dindex)
+              // console.log(dx[i], dx[j], dindex)
               if (this.markStatus[dindex] === 1) {
                 markMine = markMine + 1
               }
             }
           }
         }
-        console.log(markMine, markMine === this.neighbourMineCount[index])
+        // console.log(markMine, markMine === this.neighbourMineCount[index])
         if (markMine === this.neighbourMineCount[index]) {
           for (i in dx) {
             for (j in dx) {
@@ -404,9 +441,9 @@ export default {
       return false
     },
     floodfill (x, y, t) {
-      console.log('ff', x, y, t)
+      // console.log('ff', x, y, t)
       if (x < 0 || y < 0 || x === this.height || y === this.width) {
-        console.log('ff1')
+        // console.log('ff1')
         return
       }
       const index = x * this.width + y
@@ -415,13 +452,13 @@ export default {
       }
       if (this.openStatus[index] === 1) {
         if (!t) {
-          console.log('ff2')
+          // console.log('ff2')
           return
         }
       }
       this.openStatus.splice(index, 1, 1)
       if (this.neighbourMineCount[index] > 0) {
-        console.log('ff3')
+        // console.log('ff3')
         if (!t || !this.isFirst) {
           return
         }
@@ -452,14 +489,22 @@ export default {
 </script>
 
 <style scoped>
+.icon{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 .game-container {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 15px;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  padding: 0 20px;
+  /* overflow: auto; */
+  white-space: nowrap;
 }
 
 .mine-sweeper-container {
-  overflow: hidden;
   width: fit-content;
   margin: 0 auto;
   background-color: #f2f1f0;
@@ -470,14 +515,16 @@ export default {
 }
 
 .mine-sweeper-item {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   margin: 2px;
-  line-height: 50px;
-  font-size: 34px;
+  /* line-height: 50px; */
+  font-size: 20px;
   text-align: center;
+  vertical-align: middle;
   background-color: #babdb6;
   cursor: pointer;
+  overflow: auto;
 }
 
 .mine-sweeper-item.is-open {
@@ -485,8 +532,10 @@ export default {
 }
 
 .panel-container {
-  width: 180px;
-  display: flex;
+  margin-left: 20px;
+  width: 100px;
+  /* display: flex; */
+  display: inline-block;
   flex-direction: column;
   justify-content: space-between;
 }

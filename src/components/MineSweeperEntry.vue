@@ -110,10 +110,10 @@ export default {
         if (!Number.isInteger(value)) {
           callback(new Error('请输入数字值'))
         } else {
-          var t = this.ruleForm.width * this.ruleForm.height
+          var t = this.ruleForm.width * this.ruleForm.height * 0.3
           // console.log('M', this.ruleForm.width, this.ruleForm.height, t)
           if (value < 1 || value >= t) {
-            callback(new Error('数量错误'))
+            callback(new Error('数量错误,需在0~' + (t - 1) + '之间'))
           } else {
             callback()
           }
@@ -128,8 +128,8 @@ export default {
         if (!Number.isInteger(value)) {
           callback(new Error('请输入数字值'))
         } else {
-          if (value < 1 || value > 50) {
-            callback(new Error('宽高需在0~50之间'))
+          if (value < 1 || value > 30) {
+            callback(new Error('宽高需在0~30之间'))
           } else {
             callback()
           }
