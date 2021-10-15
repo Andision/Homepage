@@ -6,6 +6,7 @@ import Gallery from '@/components/Gallery'
 import Codepic from '@/components/Codepic'
 import MineSweeperEntry from '@/components/MineSweeperEntry'
 import Gameboard from '@/components/Gameboard'
+import FileDrop from '@/components/FileDrop'
 
 Vue.use(Router)
 
@@ -58,6 +59,14 @@ export default new Router({
         title: 'MineSweeper | AndisionZhang'
       },
       component: Gameboard
+    },
+    {
+      path: '/filedrop',
+      name: 'FileDrop',
+      meta: {
+        title: 'FileDrop | FileDrop'
+      },
+      component: FileDrop
     }
   ]
 })
