@@ -41,9 +41,18 @@
       </el-header>
       <el-main class="main" style="padding: 0;"><router-view /></el-main>
       <el-footer class="footer" style="padding: 0;">
-        <div class="footer-div">
+        <el-row class="footer-map">
+          <a href="https://clustrmaps.com/site/1blnh"  title="Visit tracker">
+            <img src="//www.clustrmaps.com/map_v2.png?d=hVHFoyIkf6OBi1GeEAbP6dS0jZDUgGC8LtqJKr_mjK4&cl=ffffff" />
+          </a>
+          <!-- <el-col :span="12">
+          </el-col>
+          <el-col :span="12">
+          </el-col> -->
+        </el-row>
+        <el-row class="footer-div">
           © 2020 Andision Zhang. All Rights Reserved | <a href="http://beian.miit.gov.cn/" style="color:white;">京ICP备20029294号</a> | Design by Andision with ❤
-        </div>
+        </el-row>
       </el-footer>
     </el-container>
   </div>
@@ -153,12 +162,18 @@ body,
   min-height: 100%;
   padding: 0;
 }
-
-.footer-div {
-  height: 100px;
+.footer-map{
+  height: 180px;
   background-color: black;
   color: white;
-  padding-top: 60px;
+  padding-top: 30px;
+}
+
+.footer-div {
+  height: 50px;
+  background-color: black;
+  color: white;
+  padding-top: 10px;
 }
 
 .el-menu--horizontal>.el-menu-item.is-active {
