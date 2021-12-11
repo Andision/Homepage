@@ -128,7 +128,7 @@ export default {
       console.log('TU', this.textarea)
       let formData = new FormData()
       formData.append('msg', this.textarea)
-      this.$axios.post('/api/filedrop/upload/text',formData).then((res) => {
+      this.$axios.post('/api/filedrop/upload/text', formData).then((res) => {
         console.log('upload', res.data)
         if (res.status === 200) {
           if (res.data.result === 'ok') {
@@ -144,7 +144,7 @@ export default {
       // this.GetDialogVisible = false
       let formData = new FormData()
       formData.append('code', this.getcode)
-      this.$axios.post('/api/filedrop/download/text',formData).then((res) => {
+      this.$axios.post('/api/filedrop/download/text', formData).then((res) => {
         console.log('upload', res.data)
         if (res.status === 200) {
           if (res.data.result === 'ok') {
