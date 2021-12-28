@@ -17,7 +17,7 @@ name: GitHub Actions Build and Deploy Demo
 on:
   push:
     branches:
-      - master
+      - Online
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # 我们选择使用最新的ubuntu系统
