@@ -190,39 +190,39 @@ export default {
   },
   methods: {
     handleSubmitScore () {
-      var that = this
-      this.$prompt(
+      // var that = this
+      this.$confirm(
         '<div>用时' +
           this.time.m +
           ':' +
           this.time.s +
-          '</div><div>请留下您的大名</div>',
+          '</div>',
         '成功！',
         {
           dangerouslyUseHTMLString: true,
           confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          inputPattern: /(.)+/,
-          inputErrorMessage: '格式不正确'
+          cancelButtonText: '取消'
+          // inputPattern: /(.)+/,
+          // inputErrorMessage: '格式不正确'
         }
       )
         .then(({ value }) => {
-          let formData = new FormData()
-          formData.append('m', that.time.m)
-          formData.append('s', that.time.s)
-          formData.append('w', that.width)
-          formData.append('h', that.height)
-          formData.append('mine', that.mineCount)
-          formData.append('name', value)
-          this.$axios.post('/api/mine', formData).then((res) => {
-            console.log('upload', res)
-            if (res.status === 200) {
-              that.$message({
-                message: '提交成功',
-                type: 'success'
-              })
-            }
-          })
+          // let formData = new FormData()
+          // formData.append('m', that.time.m)
+          // formData.append('s', that.time.s)
+          // formData.append('w', that.width)
+          // formData.append('h', that.height)
+          // formData.append('mine', that.mineCount)
+          // formData.append('name', value)
+          // this.$axios.post('/api/mine', formData).then((res) => {
+          //   console.log('upload', res)
+          //   if (res.status === 200) {
+          //     that.$message({
+          //       message: '提交成功',
+          //       type: 'success'
+          //     })
+          //   }
+          // })
         })
         .catch(() => {
           // this.$message({

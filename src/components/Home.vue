@@ -138,11 +138,12 @@
                 <el-form-item label="您的名称">
                   <el-input
                     v-model="msg.name"
+                    disabled
                     placeholder="如何称呼您？"
                   ></el-input>
                 </el-form-item>
                 <el-form-item label="联系方式">
-                  <el-input v-model="msg.mail" placeholder="如何联系您？"></el-input>
+                  <el-input v-model="msg.mail" disabled placeholder="如何联系您？"></el-input>
                 </el-form-item>
                 <el-form-item label="您的留言">
                   <el-input
@@ -150,11 +151,12 @@
                     :rows="4"
                     placeholder="您想说的话~"
                     v-model="msg.msg"
+                    disabled
                   >
                   </el-input>
                 </el-form-item>
                 <el-form-item style="text-align:right;">
-                  <el-button type="primary" @click="onSubmit">发送</el-button>
+                  <el-button type="primary" disabled @click="onSubmit">发送</el-button>
                 </el-form-item>
               </el-form>
             </div>
