@@ -18,6 +18,7 @@ on:
   push:
     branches:
       - Online
+      - master
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # 我们选择使用最新的ubuntu系统
